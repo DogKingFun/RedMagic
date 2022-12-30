@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import FlowView from '../views/FlowView.vue'
+import FlowView2 from '../views/FlowView2.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/flow',
     name: 'flow',
     component: FlowView
+  },
+  {
+    path: '/flow2',
+    name: 'flow2',
+    component: FlowView2
   }
 ]
 
