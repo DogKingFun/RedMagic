@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import FlowView from '../views/FlowView.vue'
 import FlowView2 from '../views/FlowView2.vue'
+import FlowView3 from '../views/FlowView3.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/flow2',
     name: 'flow2',
     component: FlowView2
+  },
+  {
+    path: '/flow3',
+    name: 'flow3',
+    component: FlowView3
   }
 ]
 

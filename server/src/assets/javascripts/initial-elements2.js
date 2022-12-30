@@ -1,17 +1,17 @@
-import { MarkerType, Position } from '@vue-flow/core'
+import { MarkerType, Position, useVueFlow } from '@vue-flow/core'
 
 export const initialElements = [
   {
     id: '1',
     type: 'input',
-    label: 'Node 1',
+    label: 'Start',
     position: { x: 0, y: 50 },
     sourcePosition: Position.Right,
   },
   {
     id: '2',
     type: 'output',
-    label: 'Node 2',
+    label: 'End',
     position: { x: 750, y: 50 },
     sourcePosition: Position.Right,
     targetPosition: Position.Left,

@@ -9,6 +9,7 @@ const { onConnect, addEdges } = useVueFlow()
 const elements = ref(initialElements)
 
 onConnect((params) => addEdges([params]))
+
 </script>
 
 <template>
