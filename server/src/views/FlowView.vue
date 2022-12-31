@@ -5,18 +5,36 @@ import { ref } from 'vue'
 
 const { nodes, addNodes, edges, addEdges, onConnect, onPaneReady, onNodeDragStop, dimensions } = useVueFlow()
 
-const addRandomNode = () => {
+const addRandomNode = (source,target) => {
   const nodeId = (nodes.value.length + 1).toString()
-  console.log(nodes.value[0].label)
-  nodes.value[0].label = nodeId
+  console.log(nodes.value[0])
   console.log(edges.value[0])
   const newNode = {
     id: nodeId,
     label: `Node: ${nodeId}`,
     position: { x: Math.random() * dimensions.value.width, y: Math.random() * dimensions.value.height },
+    sourcePosition: Position.Right,
+    targetPosition: Position.Left,
   }
 
   addNodes([newNode])
+  edges.value[0].target = nodeId
+
+  // const newEdge = {
+  //  id: 'e3-2',
+  //  source: '3',
+  //   target: '2',
+  //    animated: false,
+  //    events: {
+  //     click: () => {
+  //       let source = 3
+  //       let target = 2
+  //       addRandomNode(source,target)
+  //     },
+  //    }
+  // }
+
+  // addEdges([newEdge])
 }
 
 const initialElements = [
@@ -41,7 +59,9 @@ const initialElements = [
      animated: false,
      events: {
       click: () => {
-        addRandomNode()
+        let source = "1"
+        let target = "2"
+        addRandomNode(source,target)
       },
      }
   },
