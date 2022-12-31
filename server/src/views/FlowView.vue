@@ -7,7 +7,9 @@ const { nodes, addNodes, edges, addEdges, onConnect, onPaneReady, onNodeDragStop
 
 const addRandomNode = () => {
   const nodeId = (nodes.value.length + 1).toString()
-
+  console.log(nodes.value[0].label)
+  nodes.value[0].label = nodeId
+  console.log(edges.value[0])
   const newNode = {
     id: nodeId,
     label: `Node: ${nodeId}`,
