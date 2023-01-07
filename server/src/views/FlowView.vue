@@ -3,38 +3,70 @@ import { Background, Controls, MiniMap, Panel, PanelPosition } from '@vue-flow/a
 import { VueFlow, isNode, useVueFlow, Position } from '@vue-flow/core'
 import { ref } from 'vue'
 
-const { nodes, addNodes, edges, addEdges, onConnect, onPaneReady, onNodeDragStop, dimensions } = useVueFlow()
+const { nodes, addNodes, edges, addEdges, removeEdges, onConnect, onPaneReady, onNodeDragStop, dimensions } = useVueFlow()
 
-const addRandomNode = (source,target) => {
-  const nodeId = (nodes.value.length + 1).toString()
-  console.log(nodes.value[0])
-  console.log(edges.value[0])
-  const newNode = {
-    id: nodeId,
-    label: `Node: ${nodeId}`,
-    position: { x: Math.random() * dimensions.value.width, y: Math.random() * dimensions.value.height },
-    sourcePosition: Position.Right,
-    targetPosition: Position.Left,
+
+class Eve{
+  constructor(id){
+    this.id = id
   }
-
-  addNodes([newNode])
-  edges.value[0].target = nodeId
-
-  // const newEdge = {
-  //  id: 'e3-2',
-  //  source: '3',
-  //   target: '2',
-  //    animated: false,
-  //    events: {
-  //     click: () => {
-  //       let source = 3
-  //       let target = 2
-  //       addRandomNode(source,target)
-  //     },
-  //    }
-  // }
-
-  // addEdges([newEdge])
+  // edge methods
+  edge_click(){
+    const id = (nodes.value.length + 1).toString()
+    const newNode = this.node_create(id)
+    addNodes([newNode])
+    const edge = this.edge_search()
+    const source = edge.source
+    const target = edge.target
+    const newEdge1 = this.edge_create(source,id)
+    const newEdge2 = this.edge_create(id,target)
+    addEdges([newEdge1,newEdge2])
+    removeEdges([edge])
+  }
+  edge_search(){
+    for(let edge of edges.value){
+      if(this.id == edge.id){
+        return edge
+      }
+    }
+  }
+  edge_create(source,target){
+    const id = `e${source}-${target}`
+    const newEdge = {
+      id: id,
+      source: source,
+      target: target,
+      animated: false,
+      events: {
+        click: () => {
+          const eve = new Eve(id)
+          eve.edge_click()
+        },
+      }
+    }
+    return newEdge
+  }
+  // node methods
+  node_click(){
+    console.log('開発途中')
+  }
+  node_search(){
+    for(let node of nodes.value){
+        if(this.id == node.id){
+          return node
+        }
+      }
+  }
+  node_create(id){
+    const newNode = {
+      id: id,
+      label: `Node: ${id}`,
+      position: { x: Math.random() * dimensions.value.width, y: Math.random() * dimensions.value.height },
+      sourcePosition: Position.Right,
+      targetPosition: Position.Left,
+    }
+    return newNode
+  }
 }
 
 const initialElements = [
@@ -59,9 +91,8 @@ const initialElements = [
      animated: false,
      events: {
       click: () => {
-        let source = "1"
-        let target = "2"
-        addRandomNode(source,target)
+        const eve = new Eve('e1-2')
+        eve.edge_click()
       },
      }
   },
