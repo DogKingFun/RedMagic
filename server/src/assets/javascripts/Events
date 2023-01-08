@@ -1,0 +1,80 @@
+
+class Events{
+  constructor(id,nodes,edges,addNodes,addEdges,removeEdges,dimensions,Position){
+    this.id = id
+    this.nodes = nodes
+    this.edges = edges
+    this.addNodes = addNodes
+    this.addEdges = addEdges
+    this.removeEdges = removeEdges
+    this.dimensions = dimensions
+    this.Position = Position
+  }
+  // edge methods
+  edge_click(){
+    console.log(3)
+    const id = (this.nodes.value.length + 1).toString()
+    console.log(4)
+    const newNode = this.node_create(id)
+    this.addNodes([newNode])
+    const edge = this.edge_search()
+    const source = edge.source
+    const target = edge.target
+    const newEdge1 = this.edge_create(source,id)
+    const newEdge2 = this.edge_create(id,target)
+    this.addEdges([newEdge1,newEdge2])
+    this.removeEdges([edge])
+  }
+  edge_search(){
+    for(let edge of this.edges.value){
+      if(this.id == edge.id){
+        return edge
+      }
+    }
+  }
+  edge_create(source,target){
+    const id = `e${source}-${target}`
+    const newEdge = {
+      id: id,
+      source: source,
+      target: target,
+      animated: false,
+      events: {
+        click: () => {
+            const events = this.instance(id)
+            events.edge_click()
+        },
+      }
+    }
+    return newEdge
+  }
+  // node methods
+  node_click(){
+    console.log('開発途中')
+  }
+  node_search(){
+    for(let node of this.nodes.value){
+        if(this.id == node.id){
+          return node
+        }
+      }
+  }
+  node_create(id){
+    console.log(5)
+    const newNode = {
+      id: id,
+      label: `Node: ${id}`,
+      position: { x: Math.random() * this.dimensions.value.width, y: Math.random() * this.dimensions.value.height },
+      sourcePosition: this.Position.Right,
+      targetPosition: this.Position.Left,
+    }
+    console.log(6)
+    return newNode
+  }
+  instance(id){
+    const events = new Events(id,this.nodes,this.edges,this.addNodes,this.addEdges,this.removeEdges,this.dimensions,this.Position)
+    return events
+  }
+}
+
+export default Events
