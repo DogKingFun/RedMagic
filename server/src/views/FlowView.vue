@@ -2,72 +2,9 @@
 import { Background, Controls, MiniMap, Panel, PanelPosition } from '@vue-flow/additional-components'
 import { VueFlow, isNode, useVueFlow, Position } from '@vue-flow/core'
 import { ref } from 'vue'
+import Events from '../assets/javascripts/Events'
 
 const { nodes, addNodes, edges, addEdges, removeEdges, onConnect, onPaneReady, onNodeDragStop, dimensions } = useVueFlow()
-
-
-class Eve{
-  constructor(id){
-    this.id = id
-  }
-  // edge methods
-  edge_click(){
-    const id = (nodes.value.length + 1).toString()
-    const newNode = this.node_create(id)
-    addNodes([newNode])
-    const edge = this.edge_search()
-    const source = edge.source
-    const target = edge.target
-    const newEdge1 = this.edge_create(source,id)
-    const newEdge2 = this.edge_create(id,target)
-    addEdges([newEdge1,newEdge2])
-    removeEdges([edge])
-  }
-  edge_search(){
-    for(let edge of edges.value){
-      if(this.id == edge.id){
-        return edge
-      }
-    }
-  }
-  edge_create(source,target){
-    const id = `e${source}-${target}`
-    const newEdge = {
-      id: id,
-      source: source,
-      target: target,
-      animated: false,
-      events: {
-        click: () => {
-          const eve = new Eve(id)
-          eve.edge_click()
-        },
-      }
-    }
-    return newEdge
-  }
-  // node methods
-  node_click(){
-    console.log('開発途中')
-  }
-  node_search(){
-    for(let node of nodes.value){
-        if(this.id == node.id){
-          return node
-        }
-      }
-  }
-  node_create(id){
-    const newNode = {
-      id: id,
-      label: `Node: ${id}`,
-      position: { x: Math.random() * dimensions.value.width, y: Math.random() * dimensions.value.height },
-      sourcePosition: Position.Right,
-      targetPosition: Position.Left,
-    }
-    return newNode
-  }
-}
 
 const initialElements = [
   {
@@ -91,8 +28,10 @@ const initialElements = [
      animated: false,
      events: {
       click: () => {
-        const eve = new Eve('e1-2')
-        eve.edge_click()
+        console.log(1)
+        const events = new Events('e1-2',nodes,edges,addNodes,addEdges,removeEdges,dimensions,Position)
+        console.log(2)
+        events.edge_click()
       },
      }
   },
@@ -124,5 +63,5 @@ onConnect((params) => addEdges([params]))
 </template>
 
 <style>
-  @import '../assets/stylesheets/main2.css';
+  @import '../assets/stylesheets/main.css';
 </style>
