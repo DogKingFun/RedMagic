@@ -1,5 +1,132 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+head
+  // Primary Meta Tags
+  title Flowy - The simple flowchart engine
+  meta(name='title', content='Flowy - The simple flowchart engine')
+  meta(name='description', content='Flowy is a minimal javascript library to create flowcharts. Use it for automation software, mind mapping tools, programming platforms, and more. Made by Alyssa X.')
+  // Open Graph / Facebook
+  meta(property='og:type', content='website')
+  meta(property='og:url', content='https://alyssax.com/x/flowy')
+  meta(property='og:title', content='Flowy - The simple flowchart engine')
+  meta(property='og:description', content='Flowy is a minimal javascript library to create flowcharts. Use it for automation software, mind mapping tools, programming platforms, and more. Made by Alyssa X.')
+  meta(property='og:image', content='https://alyssax.com/x/assets/meta.png')
+  // Twitter
+  meta(property='twitter:card', content='summary_large_image')
+  meta(property='twitter:url', content='https://alyssax.com/x/flowy')
+  meta(property='twitter:site', content='alyssaxuu')
+  meta(property='twitter:title', content='Flowy - The simple flowchart engine')
+  meta(property='twitter:description', content='Flowy is a minimal javascript library to create flowcharts. Use it for automation software, mind mapping tools, programming platforms, and more. Made by Alyssa X.')
+  meta(property='twitter:image', content='https://alyssax.com/x/assets/meta.png')
+  link(href='https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap', rel='stylesheet')
+  link(href='/stylesheets/styles.css', rel='stylesheet', type='text/css')
+  link(href='/stylesheets/flowy.min.css', rel='stylesheet', type='text/css')
+  meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+  script(src='/javascripts/flowy.min.js')
+  script(src='/javascripts/main.js')
+#navigation
+  #leftside
+    #details
+      #back
+        img(src='/images/arrow.svg')
+      #names
+        p#title Your automation pipeline
+        p#subtitle Marketing automation
+  #centerswitch
+    #leftswitch Diagram view
+    #rightswitch Code editor
+  #buttonsright
+    #discard Discard
+    #publish Publish to site
+#leftcard
+  #closecard
+    img(src='/images/closeleft.svg')
+  p#header Blocks
+  #search
+    img(src='/images/search.svg')
+    input(type='text', placeholder='Search blocks')
+  #subnav
+    #triggers.navactive.side Triggers
+    #actions.navdisabled.side Actions
+    #loggers.navdisabled.side Loggers
+  #blocklist
+    .blockelem.create-flowy.noselect
+      input.blockelemtype(type='hidden', name='blockelemtype', value='1')
+      .grabme
+        img(src='/images/grabme.svg')
+      .blockin
+        .blockico
+          span
+          img(src='/images/eye.svg')
+        .blocktext
+          p.blocktitle New visitor
+          p.blockdesc Triggers when somebody visits a specified page
+    .blockelem.create-flowy.noselect
+      input.blockelemtype(type='hidden', name='blockelemtype', value='2')
+      .grabme
+        img(src='/images/grabme.svg')
+      .blockin
+        .blockico
+          span
+          img(src='/images/action.svg')
+        .blocktext
+          p.blocktitle Action is performed
+          p.blockdesc Triggers when somebody performs a specified action
+    .blockelem.create-flowy.noselect
+      input.blockelemtype(type='hidden', name='blockelemtype', value='3')
+      .grabme
+        img(src='/images/grabme.svg')
+      .blockin
+        .blockico
+          span
+          img(src='/images/time.svg')
+        .blocktext
+          p.blocktitle Time has passed
+          p.blockdesc Triggers after a specified amount of time
+    .blockelem.create-flowy.noselect
+      input.blockelemtype(type='hidden', name='blockelemtype', value='4')
+      .grabme
+        img(src='/images/grabme.svg')
+      .blockin
+        .blockico
+          span
+          img(src='/images/error.svg')
+        .blocktext
+          p.blocktitle Error prompt
+          p.blockdesc Triggers when a specified error happens
+  #footer
+    a(href='https://github.com/alyssaxuu/flowy/', target='_blank') GitHub
+    span &middot;
+    a(href='https://twitter.com/alyssaxuu/status/1199724989353730048', target='_blank') Twitter
+    span &middot;
+    a(href='https://alyssax.com', target='_blank')
+      p Made with
+      img(src='/images/heart.svg')
+      p by
+      |  Alyssa X
+#propwrap
+  #properties
+    #close
+      img(src='/images/close.svg')
+    p#header2 Properties
+    #propswitch
+      #dataprop Data
+      #alertprop Alerts
+      #logsprop Logs
+    #proplist
+      p.inputlabel Select database
+      .dropme
+        | Database 1 
+        img(src='/images/dropdown.svg')
+      p.inputlabel Check properties
+      .dropme
+        | All
+        img(src='/images/dropdown.svg')
+      .checkus
+        img(src='/images/checkon.svg')
+        p Log on successful performance
+      .checkus
+        img(src='/images/checkoff.svg')
+        p Give priority to this block
+    #divisionthing
+    #removeblock Delete blocks
+#canvas
