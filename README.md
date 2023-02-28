@@ -3,7 +3,6 @@
  　これはプロジェクトで何が良いのかを実験して、良いと思ったものを保存しておくためのリポジトリ。
   
 # メモ
-
+・flowyでは動的にフローチャートの作成が困難であったため、Drawflowのライブラリに移行
 
 # References
-・https://github.com/alyssaxuu/flowy
